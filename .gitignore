@@ -1,0 +1,10 @@
+*.top
+*.cmi
+*.cmo
+*.cmx
+*.asm
+*.s
+*.o
+*.a
+vecna
+._*
