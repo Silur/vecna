@@ -5,12 +5,12 @@ let rand (bytes: int) =
     ret
 ;;
 
-let rand_z (p: Z.t) = 
+let rec rand_z (p: Z.t) = 
     let rb = rand ((Z.log2 p)/8) in
     let hex = Hex.show (Hex.of_string (Bytes.to_string rb)) in
     let r1 = Z.of_string_base 16 hex in
-    let r2 = Z.rem r1 p in
-    match r2 with
-        | r2 when (Z.equal r2 Z.zero) -> Z.one
-        | _ -> r2
+    match r1 with
+        | r1 when (Z.equal r1 Z.zero) -> Z.one
+        | r1 when (Z.gt r1 p) ->  rand_z p
+        | _ -> r1
 ;;
